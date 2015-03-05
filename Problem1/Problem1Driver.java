@@ -3,8 +3,10 @@ import java.util.List;
 
 
 public class Problem1Driver {
-	private static int numThreads = 100;
+	private static int numThreads = 20;
+	private static int numSubmissionsPerThread = 50000;
 	private static List<Thread> producers;
+
 	private static List<Thread> consumers;
 
 	public static void main(String[] args) throws InterruptedException {
@@ -12,18 +14,20 @@ public class Problem1Driver {
         consumers = new ArrayList<Thread>();
 
 		for (int threadIndex = 0; threadIndex < numThreads; threadIndex++) {
-			newProducerThread(1000);
+			newProducerThread(numSubmissionsPerThread);
 		}
 		
 		for (int threadIndex = 0; threadIndex < numThreads; threadIndex++) {
-			newConsumerThread(1000);
+			newConsumerThread(numSubmissionsPerThread);
 		}
 
 		for (Thread producer : producers)
-			producer.wait();
+			producer.join();
 
-		for (Thread consumer: producers)
-			consumer.wait();
+		for (Thread consumer: consumers)
+			consumer.join();
+		
+		System.out.println("Finished, all submissions processed!");
 	}
 	
 	public static void newProducerThread(final int numThings) {
@@ -34,6 +38,7 @@ public class Problem1Driver {
 					Submission newSubmission = new Submission();
 					queue.add(newSubmission);
 				}
+				System.out.println("Produce finished! Produced " + Problem1Driver.numSubmissionsPerThread + " submissions.");
 			}
 		};
 		Thread thread = new Thread(producer);
@@ -46,8 +51,12 @@ public class Problem1Driver {
 			public void run() {
 				SubmissionQueue queue = SubmissionQueue.getInstance();
 				for (int index = 0; index < numThings; index++) {
-					Submission mySubmission = queue.process();
+					Submission mySubmission = null;
+					while (mySubmission == null) {
+						mySubmission = queue.process();
+					}
 				}
+				System.out.println("Consumer finished! Consumed " + Problem1Driver.numSubmissionsPerThread + " submissions.");
 			}
 		};
 
