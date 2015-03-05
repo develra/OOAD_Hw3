@@ -17,4 +17,3 @@ public class Submission
     id = rand.nextInt(10000000);
   }
 }
-
