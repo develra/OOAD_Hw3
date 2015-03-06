@@ -4,7 +4,7 @@ import java.util.List;
 
 
 public class Problem1Driver {
-	private static int numThreads = 20;
+	private static int numThreads = 10;
 	private static int numSubmissionsPerThread = 50000;
 	private static List<Thread> producers;
 
@@ -13,10 +13,14 @@ public class Problem1Driver {
 	public static void main(String[] args) throws InterruptedException {
         producers = new ArrayList<Thread>();
         consumers = new ArrayList<Thread>();
+        
+        System.out.println("Creating " + numThreads + " producer threads.");
 
 		for (int threadIndex = 0; threadIndex < numThreads; threadIndex++) {
 			newProducerThread(numSubmissionsPerThread);
 		}
+
+        System.out.println("Creating " + numThreads + " consumer threads.");
 		
 		for (int threadIndex = 0; threadIndex < numThreads; threadIndex++) {
 			newConsumerThread(numSubmissionsPerThread);
