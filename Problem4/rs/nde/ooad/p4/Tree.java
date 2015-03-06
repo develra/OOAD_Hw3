@@ -14,7 +14,7 @@ class Tree implements Terrain
 	public Tree(String type)
 	{
 		System.out.println("Creating a new instance of a tree of type " + type);
-		String filename = "Problem4/assets/tree" + type + ".png";
+		String filename = "Problem4/tree" + type + ".png";
 		try
 		{
 			image = ImageIO.read(new File(filename));
