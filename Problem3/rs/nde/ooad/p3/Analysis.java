@@ -1,3 +1,5 @@
+package rs.nde.ooad.p3;
+
 interface Logging
 {
 	public enum LOG_TYPE {TXT, XML, HTML};
@@ -27,6 +29,7 @@ class LogXML implements Logging
 		System.out.println("<xml><msg>"+msg+"</msg></xml>");
 	}
 }
+
 class LogHTML implements Logging
 {
 	public LogHTML()
@@ -40,8 +43,10 @@ class LogHTML implements Logging
 	}
 }
 
+
 class Analysis
 {
+	private static LoggingFactory Loggingfactory;
 	public static void main(String[] args)
 	{
 		if (args.length != 1)
@@ -50,22 +55,13 @@ class Analysis
 			System.exit(-1);
 		}
 		String type = args[0];
-		Logging logfile;
-		if (type.equalsIgnoreCase("text"))
-			logfile = new LogText();
-		else if (type.equalsIgnoreCase("xml"))
-			logfile = new LogXML();
-		else if (type.equalsIgnoreCase("html"))
-			logfile = new LogHTML();
-		else
-			logfile = new LogText();
+		Logging logfile = Loggingfactory.createLog(type);
+		
 		logfile.log("Starting application...");
 
 		System.out.println("... read in data file to analyze ...");
-		// code...
 		System.out.println("... Clustering data for analysis ...");
-		// code...
 		System.out.println("... Printing analysis results ...");
-		// code...
 	}
 }
+
