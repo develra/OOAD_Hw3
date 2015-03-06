@@ -32,9 +32,10 @@ public class Submission implements SubmissionSubject
 		if(!passed)
 		{
 		    lastErrorWasTimeout = myRandom.nextBoolean();
+		} else {
+			lastErrorWasTimeout = false;
 		}
-		
-		// You can add to the end of this method for reporting purposes
+		notifyObservers();
 	}
 	
     public boolean wasTimeoutError()
