@@ -13,7 +13,7 @@ class TreeDemo extends JPanel
 {
 	private static final int width = 800;
 	private static final int height = 700;
-	private static final int numTrees = 50;
+	private static final int numTrees = 500;
 	private static final String type[] = { "Apple", "Lemon", "Blob", "Elm", "Maple" };
 
 	public void paint(Graphics graphics)
