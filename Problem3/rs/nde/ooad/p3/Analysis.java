@@ -43,7 +43,6 @@ class LogHTML implements Logging
 	}
 }
 
-
 class Analysis
 {
 	private static LoggingFactory Loggingfactory;
@@ -55,13 +54,11 @@ class Analysis
 			System.exit(-1);
 		}
 		String type = args[0];
+		Loggingfactory = new LoggingFactory();
 		Logging logfile = Loggingfactory.createLog(type);
 		
 		logfile.log("Starting application...");
-
-		System.out.println("... read in data file to analyze ...");
-		System.out.println("... Clustering data for analysis ...");
-		System.out.println("... Printing analysis results ...");
+		logfile.log("INFO: Important message!");
+		logfile.log("Exiting. Exit code 0");
 	}
 }
-
