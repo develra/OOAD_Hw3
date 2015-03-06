@@ -50,6 +50,7 @@ public class Submission implements SubmissionSubject
 
 	@Override
 	public void registerObserver(Observer obj) {
+		System.out.println("Registering new Observer on submission: " + obj.toString());
 		this.observers.add(obj);
 	}
 
